@@ -17,7 +17,7 @@ namespace CustomerManagement.Data
         private CustomerDbContext db;
         public CustomerRepository()
         {
-            new MapperConfig().ConfigureMappings();
+            new RepositoryMapperConfig().ConfigureMappings();
 
             db = new CustomerDbContext();
             

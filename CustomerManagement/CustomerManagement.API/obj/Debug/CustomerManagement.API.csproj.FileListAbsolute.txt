@@ -89,3 +89,10 @@ C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\Cu
 C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.API\obj\Debug\CustomerManagement.API.pdb
 C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.API\obj\Debug\CustomerManagement.API.Migrations.InitialAuthDBCreate.resources
 C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.API\obj\Debug\CustomerManagement.API.csproj.GenerateResource.Cache
+C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.API\bin\App_Data\CustomerManagementDB.mdf
+C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.API\bin\App_Data\CustomerManagementDB_log.ldf
+C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.API\bin\CustomerManagement.Data.dll
+C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.API\bin\AutoMapper.dll
+C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.API\bin\CustomerManagement.Data.pdb
+C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.API\bin\AutoMapper.xml
+C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.API\obj\Debug\CustomerManagement.API.csprojResolveAssemblyReference.cache

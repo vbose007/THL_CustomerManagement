@@ -98,13 +98,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>CustomerManagementDB.mdf</DependentUpon>
     </Content>
-    <Content Include="CustomerManagementDB.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CustomerManagementDB_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>CustomerManagementDB.mdf</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
@@ -120,7 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <Compile Include="Config\MapperConfig.cs" />
+    <Compile Include="Config\RepositoryMapperConfig.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,7 @@ using CustomerManagement.Data.Models;
 
 namespace CustomerManagement.Data.Config
 {
-    public class MapperConfig
+    public class RepositoryMapperConfig
     {
         public void ConfigureMappings()
         {
