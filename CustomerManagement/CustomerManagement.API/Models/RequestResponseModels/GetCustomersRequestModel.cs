@@ -1,4 +1,4 @@
-﻿namespace CustomerManagement.API.Models.Request
+﻿namespace CustomerManagement.API.Models.RequestResponseModels
 {
     public class GetCustomersRequestModel
     {

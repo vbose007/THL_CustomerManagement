@@ -22,6 +22,8 @@ namespace CustomerManagement.Data.Models
         [EmailAddress]
         public string EmailAddress { get; set; }
 
+        public string CreatedBy { get; set; }
+
         public Customer ToModel()
         {
            return Mapper.Map<Customer>(this);

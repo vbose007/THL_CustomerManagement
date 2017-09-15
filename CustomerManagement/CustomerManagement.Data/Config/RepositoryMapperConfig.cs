@@ -14,9 +14,18 @@ namespace CustomerManagement.Data.Config
 
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Customer, CustomerModel>().ReverseMap();
+                //cfg.CreateMap<Customer, CustomerModel>().ReverseMap();
+                cfg.AddProfile(new CustomerRepositoryMapProfile());
             });
             
+        }
+    }
+
+    public class CustomerRepositoryMapProfile : Profile
+    {
+        public CustomerRepositoryMapProfile()
+        {
+            CreateMap<Customer, CustomerModel>().ReverseMap();
         }
     }
 }

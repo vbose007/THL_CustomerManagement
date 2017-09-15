@@ -1,5 +1,5 @@
 ﻿using CustomerManagement.API.DTOs;
-using CustomerManagement.API.Models.Request;
+using CustomerManagement.API.Models.RequestResponseModels;
 
 namespace CustomerManagement.API.Interfaces
 {

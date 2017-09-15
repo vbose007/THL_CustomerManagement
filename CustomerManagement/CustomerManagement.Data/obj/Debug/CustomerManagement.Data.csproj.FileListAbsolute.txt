@@ -11,8 +11,9 @@ C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\Cu
 C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.Data\bin\Debug\EntityFramework.xml
 C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.Data\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.Data\bin\Debug\System.Web.Mvc.xml
+C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.Data\obj\Debug\CustomerManagement.Data.csprojResolveAssemblyReference.cache
+C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.Data\obj\Debug\CustomerManagement.Data.Migrations.InitialCreateDB.resources
+C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.Data\obj\Debug\CustomerManagement.Data.Migrations.AddedFieldCreatedBy.resources
+C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.Data\obj\Debug\CustomerManagement.Data.csproj.GenerateResource.Cache
 C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.Data\obj\Debug\CustomerManagement.Data.dll
 C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.Data\obj\Debug\CustomerManagement.Data.pdb
-C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.Data\obj\Debug\CustomerManagement.Data.Migrations.InitialCreateDB.resources
-C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.Data\obj\Debug\CustomerManagement.Data.csproj.GenerateResource.Cache
-C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.Data\obj\Debug\CustomerManagement.Data.csprojResolveAssemblyReference.cache

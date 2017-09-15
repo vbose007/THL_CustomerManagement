@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using CustomerManagement.API.DTOs;
 
-namespace CustomerManagement.API.Models.Request
+namespace CustomerManagement.API.Models.RequestResponseModels
 {
     public class GetCustomersResponseModel
     {

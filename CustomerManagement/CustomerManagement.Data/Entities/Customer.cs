@@ -18,5 +18,7 @@ namespace CustomerManagement.Data
         [Required]
         [StringLength(100)]
         public string EmailAddress { get; set; }
+
+        public string CreatedBy { get; set; }
     }
 }

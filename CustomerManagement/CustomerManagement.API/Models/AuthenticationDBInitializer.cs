@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using System.Data.Entity.Infrastructure;
+using CustomerManagement.API.Constants;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -17,11 +18,8 @@ namespace CustomerManagement.API.Models
 
 
             if (!roleManager.RoleExists(RolesEnum.Admin.ToString()))
-
             {
-
                 var roleresult = roleManager.Create(new ApplicationRole(RolesEnum.Admin.ToString()));
-
             }
 
             if (!roleManager.RoleExists(RolesEnum.User.ToString()))
@@ -33,16 +31,16 @@ namespace CustomerManagement.API.Models
             }
 
             //Create default admin user
-            var userName = ConfigurationManager.AppSettings.Get("DefaulAdminUserName");
-            var password = ConfigurationManager.AppSettings.Get("DefaulAdminPassword");
+            var userName = ApplicationConstants.DefaulAdminUserName;
+            var password = ApplicationConstants.DefaulAdminPassword;
             var role = RolesEnum.Admin.ToString();
 
             CreateUser(userManager, userName, password, role);
 
 
             //Create default non-admin user
-            userName = ConfigurationManager.AppSettings.Get("DefaulUserName");
-            password = ConfigurationManager.AppSettings.Get("DefaulUserPassword");
+            userName = ApplicationConstants.DefaulUserName;
+            password = ApplicationConstants.DefaulUserPassword;
             role = RolesEnum.User.ToString();
 
             CreateUser(userManager, userName, password, role);

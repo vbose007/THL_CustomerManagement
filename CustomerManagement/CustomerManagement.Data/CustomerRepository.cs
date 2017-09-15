@@ -17,10 +17,8 @@ namespace CustomerManagement.Data
         private CustomerDbContext db;
         public CustomerRepository()
         {
-            new RepositoryMapperConfig().ConfigureMappings();
-
+            //new RepositoryMapperConfig().ConfigureMappings();
             db = new CustomerDbContext();
-            
         }
 
         public ICollection<CustomerModel> GetAll()
@@ -30,10 +28,8 @@ namespace CustomerManagement.Data
 
         public ICollection<CustomerModel> Get(Expression<Func<Customer, bool>> where = null, Expression<Func<Customer, object>> orderBy = null, bool orderAsc = true, int pageSize = 10, int pageNumber = 1)
         {
-            var skipItemCount = pageSize*(pageNumber -1);
-
-            var pagedCustomers = GetPagedCustomersAsQueriable(@where, orderBy, orderAsc, pageSize, skipItemCount);
-            return Mapper.Map<IQueryable<CustomerModel>>(pagedCustomers).ToList();
+            var pagedCustomers = GetPagedCustomersAsQueriable(@where, orderBy, orderAsc, pageSize, pageNumber);
+            return Mapper.Map<IList<CustomerModel>>(pagedCustomers).ToList();
         }
 
         private IQueryable<Customer> GetPagedCustomersAsQueriable(Expression<Func<Customer, bool>> @where = null, Expression<Func<Customer, object>> orderBy = null, bool orderAsc =true, int pageSize =10, int pageNumber=1)
@@ -49,6 +45,14 @@ namespace CustomerManagement.Data
                 selectedCustomers = orderAsc
                     ? selectedCustomers.OrderBy(@orderBy)
                     : selectedCustomers.OrderByDescending(@orderBy);
+            }
+            else
+            {
+                Expression<Func<Customer, int>> defaultOrderBy = c => c.Id;
+                selectedCustomers = orderAsc
+                    ? selectedCustomers.OrderBy(defaultOrderBy)
+                    : selectedCustomers.OrderByDescending(defaultOrderBy);
+
             }
 
             var pagedCustomers = selectedCustomers.Skip(skipItemCount).Take(pageSize);
@@ -106,19 +110,28 @@ namespace CustomerManagement.Data
         {
             if (model == null || model.Id==0) return 0;
 
-            var customer = model.ToModel();
+            var customer = db.Customers.Find(model.Id);
 
-            db.Entry(customer).State = EntityState.Modified;
+            //db.Entry(customer).State = EntityState.Detached;
+
+            //customer = model.ToModel();
+
+            db.Entry(customer).CurrentValues.SetValues(model.ToModel());
             db.SaveChanges();
             return 1;
         }
 
         public int Delete(object key)
         {
-            var customer = Get(key)?.ToModel();
+            var customerModel = Get(key);
 
-            if (customer != null)
+
+            if (customerModel != null)
             {
+                var customer = db.Customers.SingleOrDefault(x => x.Id == customerModel.Id);
+
+                if (customer == null) return 0;
+
                 db.Customers.Remove(customer);
                 db.SaveChanges();
                 return 1;

@@ -32,6 +32,9 @@ namespace CustomerManagement.API
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/json"));
             config.Formatters.JsonFormatter.Indent = true;
 
+            var container = DependencyConfig.RegisterDependencies();
+            config.DependencyResolver = new UnityDependencyResolver(container);
+
             ApiMapperConfig.ConfigureMappings();
         }
     }

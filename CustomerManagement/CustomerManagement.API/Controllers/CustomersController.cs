@@ -3,19 +3,29 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using AutoMapper;
+using CustomerManagement.API.CustomExceptions;
 using CustomerManagement.API.DTOs;
 using CustomerManagement.API.Interfaces;
-using CustomerManagement.API.Models.Request;
+using CustomerManagement.API.Models.RequestResponseModels;
 using CustomerManagement.API.Services;
 using CustomerManagement.Data;
 using CustomerManagement.Data.CustomExceptions;
 
 namespace CustomerManagement.API.Controllers
 {
+    /***Only authenticated users can use the API ***/
+    [Authorize]
+    [RoutePrefix("api/Customers")]
     public class CustomersController : ApiController
     {
-        private readonly ICustomerService _customerService = new CustomersCustomerService(new CustomerRepository());
+        private readonly ICustomerService _customerService = new CustomersService(new CustomerRepository());
 
+        public CustomersController(ICustomerService customerService)
+        {
+            _customerService = customerService;
+        }
+        
         // GET: api/Customers
         public GetCustomersResponseModel GetCustomers([FromUri] GetCustomersRequestModel query)
         {
@@ -24,6 +34,7 @@ namespace CustomerManagement.API.Controllers
 
         // GET: api/Customers/5
         [ResponseType(typeof (CustomerDto))]
+        [Route("{id:int}")]
         public IHttpActionResult GetCustomer(int id)
         {
             var customerDto = _customerService.GetById(id);
@@ -37,14 +48,17 @@ namespace CustomerManagement.API.Controllers
 
         // PUT: api/Customers/5
         [ResponseType(typeof (void))]
+        [HttpPut]
+        [Route("{id:int}")]
         public IHttpActionResult PutCustomer(int id, CustomerDto customer)
         {
             if (!ModelState.IsValid)
             {
+                //return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "The data posted is invalid."));
                 return BadRequest(ModelState);
             }
 
-            if (id != customer.Id)
+            if (id ==0 ||  id>0 && customer.Id> 0 && id!= customer.Id)
             {
                 return BadRequest();
             }
@@ -54,12 +68,17 @@ namespace CustomerManagement.API.Controllers
                 return NotFound();
             }
 
+            customer.Id = id;
 
             try
             {
                 _customerService.Update(customer);
 
                 return StatusCode(HttpStatusCode.OK);
+            }
+            catch (AuthorizationException ex)
+            {
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.Forbidden, ex.Message));
             }
             catch (Exception e)
             {
@@ -69,18 +88,24 @@ namespace CustomerManagement.API.Controllers
 
         // POST: api/Customers
         [ResponseType(typeof (CustomerDto))]
-        public IHttpActionResult PostCustomer(CustomerDto customer)
+        [HttpPost]
+        public IHttpActionResult PostCustomer([FromBody]PostCustomerRequestModel postCustomer)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || postCustomer ==null)
             {
+                //return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "The data posted is invalid."));
                 return BadRequest(ModelState);
+
             }
 
             try
             {
-                _customerService.Create(customer);
+                var customerDto = Mapper.Map<CustomerDto>(postCustomer);
+                customerDto =_customerService.Create(customerDto);
 
-                return CreatedAtRoute("DefaultApi", new {id = customer.Id}, customer);
+                postCustomer = Mapper.Map<PostCustomerRequestModel>(customerDto);
+
+                return CreatedAtRoute("DefaultApi", new {id = customerDto.Id}, customerDto);
             }
             catch (AccountWithSameEmailExistsException ex)
             {
@@ -94,6 +119,8 @@ namespace CustomerManagement.API.Controllers
 
         // DELETE: api/Customers/5
         [ResponseType(typeof (CustomerDto))]
+        [HttpDelete]
+        [Route("{id:int}")]
         public IHttpActionResult DeleteCustomerDto(int id)
         {
             var customerDto = _customerService.GetById(id);
