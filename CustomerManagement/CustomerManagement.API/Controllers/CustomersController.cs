@@ -19,7 +19,7 @@ namespace CustomerManagement.API.Controllers
     [RoutePrefix("api/Customers")]
     public class CustomersController : ApiController
     {
-        private readonly ICustomerService _customerService = new CustomersService(new CustomerRepository());
+        private ICustomerService _customerService;
 
         public CustomersController(ICustomerService customerService)
         {

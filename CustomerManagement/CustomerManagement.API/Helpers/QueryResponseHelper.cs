@@ -12,14 +12,22 @@ namespace CustomerManagement.API.Helpers
 {
     public class QueryResponseHelper
     {
+        private IHttpContextHelper _httpHelper;
+
+        public QueryResponseHelper(IHttpContextHelper httpHelper)
+        {
+            _httpHelper = httpHelper;
+        }
+
+
         public string ComposeGetUrl(GetCustomersRequestModel query, int pageNumber)
         {
             var uri = new Uri(HttpContext.Current.Request.Url.AbsoluteUri);
-            string scheme = uri.Scheme;
-            string schemeDelimiter = Uri.SchemeDelimiter;
-            string host = uri.Host;
-            string portNumber = uri.Port != 80 ? $":{uri.Port}" : string.Empty;
-            string path = uri.AbsolutePath;
+            string scheme = _httpHelper.Scheme;
+            string schemeDelimiter = _httpHelper.SchemeDelimiter;
+            string host = _httpHelper.Host;
+            string portNumber = _httpHelper.Port != 80 ? $":{_httpHelper.Port}" : string.Empty;
+            string path = _httpHelper.Path;
 
             StringBuilder pageUrl = new StringBuilder($"{scheme}{schemeDelimiter}{host}{portNumber}{path}");
 

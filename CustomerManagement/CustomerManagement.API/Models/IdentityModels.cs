@@ -1,4 +1,6 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Data.Entity;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -19,18 +21,33 @@ namespace CustomerManagement.API.Models
     }
 
 
-    public class ApplicationRole : IdentityRole
+    public class ApplicationRole : IdentityRole//<String, ApplicationUserRole>
     {
-        public ApplicationRole(string roleName) : base(roleName) { }
+        public ApplicationRole(string roleName)
+        {
+            this.Name = roleName;
+        }
 
         public ApplicationRole() : base() { }
 
     }
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+
+    public class ApplicationRoleStore : RoleStore<IdentityRole>
+    {
+        
+    }
+    public class ApplicationUserRole : IdentityUserRole
+    {
+        
+    }
+
+    public class ApplicationDbContext : IdentityDbContext//<ApplicationUser, ApplicationRole, string, IdentityUserLogin, ApplicationUserRole, IdentityUserClaim>
     {
         public ApplicationDbContext()
-            : base("name=ApplicationDbContext", throwIfV1Schema: false)
+            : base("name=ApplicationDbContext")
         {
+            Database.SetInitializer(new AuthenticationDbInitializer());
+            
         }
         
         public static ApplicationDbContext Create()
@@ -38,6 +55,12 @@ namespace CustomerManagement.API.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<ApplicationRole> IdentityRoles { get; set; }
-    }
+        //public DbSet<ApplicationUser> IdentityUsers { get; set; }
+
+        //public DbSet<ApplicationRole> IdentityRoles { get; set; }
+
+        //public DbSet<ApplicationUserRole> IdentityUserRoles { get; set; }
+        public DbSet<ApplicationUserRole> UserRoles { get; set; }
+    } 
+    
 }

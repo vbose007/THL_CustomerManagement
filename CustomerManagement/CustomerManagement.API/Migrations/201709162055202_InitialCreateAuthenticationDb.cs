@@ -3,7 +3,7 @@ namespace CustomerManagement.API.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialAuthDBCreate : DbMigration
+    public partial class InitialCreateAuthenticationDb : DbMigration
     {
         public override void Up()
         {
@@ -24,6 +24,7 @@ namespace CustomerManagement.API.Migrations
                     {
                         UserId = c.String(nullable: false, maxLength: 128),
                         RoleId = c.String(nullable: false, maxLength: 128),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.UserId, t.RoleId })
                 .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
@@ -47,6 +48,7 @@ namespace CustomerManagement.API.Migrations
                         LockoutEnabled = c.Boolean(nullable: false),
                         AccessFailedCount = c.Int(nullable: false),
                         UserName = c.String(nullable: false, maxLength: 256),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");

@@ -25,12 +25,14 @@ namespace CustomerManagement.API.Services
     {
         private IRepository<Customer, CustomerModel> _repo;
         private readonly QueryResponseHelper _queryResponseHelper;
+        private IHttpContextHelper _httpHelper;
 
-        public CustomersService(IRepository<Customer,CustomerModel> customerRepository)
+        public CustomersService(IRepository<Customer,CustomerModel> customerRepository, IHttpContextHelper httpHelper)
         {
             _repo = customerRepository;
+            _httpHelper = httpHelper;
             ApiMapperConfig.ConfigureMappings();
-            _queryResponseHelper = new QueryResponseHelper();
+            _queryResponseHelper = new QueryResponseHelper(_httpHelper);
         }
 
         public GetCustomersResponseModel GetAll(GetCustomersRequestModel query)
@@ -74,7 +76,7 @@ namespace CustomerManagement.API.Services
                     return _repo.Update(Mapper.Map<CustomerModel>(customerDto)) == 1;
                 }
 
-                string currentUserName = HttpContext.Current.User.Identity.GetUserName();
+                string currentUserName = _httpHelper.CurrentUserName;
                 throw new AuthorizationException($"User {currentUserName} is only authorized to update or delete records created by user {currentUserName}");
             }
             catch (Exception e)
@@ -86,9 +88,9 @@ namespace CustomerManagement.API.Services
 
         private bool IsUserAuthorizedToUpdateOrDeleteCustomer(CustomerModel customerModel)
         {
-            var currentUserName = HttpContext.Current.User.Identity.GetUserName();
+            var currentUserName = _httpHelper.CurrentUserName;
 
-            bool isAdmin = HttpContext.Current.User.IsInRole(RolesEnum.Admin.ToString());
+            bool isAdmin = _httpHelper.IsCurrentUserRole(RolesEnum.Admin.ToString());
 
             if (!isAdmin && !currentUserName.Equals(customerModel.CreatedBy, StringComparison.OrdinalIgnoreCase))
             {
@@ -105,7 +107,7 @@ namespace CustomerManagement.API.Services
             {
                 var customerModel = Mapper.Map<CustomerModel>(customer);
 
-                customerModel.CreatedBy = HttpContext.Current.User.Identity.GetUserName();
+                customerModel.CreatedBy = _httpHelper.CurrentUserName;
 
                 var addedCustomer = _repo.Add(customerModel);
 
@@ -133,7 +135,7 @@ namespace CustomerManagement.API.Services
                     return _repo.Delete(customerDto.Id) == 1;
                 }
 
-                string currentUserName = HttpContext.Current.User.Identity.GetUserName();
+                string currentUserName = _httpHelper.CurrentUserName;
                 throw new AuthorizationException($"User {currentUserName} is only authorized to update or delete records created by user {currentUserName}");
 
             }

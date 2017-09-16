@@ -28,15 +28,11 @@ namespace CustomerManagement.API.Providers
 
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 
-            //using (AuthRepository _repo = new AuthRepository())
-            {
-                //IdentityUser user = await _repo.FindUser(context.UserName, context.Password);
 
-                if (!IsValidUser(context))
-                {
-                    context.SetError("invalid_grant", "The user name or password is incorrect.");
-                    return;
-                }
+            if (!IsValidUser(context))
+            {
+                context.SetError("invalid_grant", "The user name or password is incorrect.");
+                return;
             }
 
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
@@ -62,8 +58,8 @@ namespace CustomerManagement.API.Providers
 
         private bool IsValidUser(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
-            var signInManager = context.OwinContext.GetUserManager<ApplicationSignInManager>();
+            var userManager = context.OwinContext.Get<ApplicationUserManager>();
+            var signInManager = context.OwinContext.Get<ApplicationSignInManager>();
 
             var user = userManager.FindByName(context.UserName);
 

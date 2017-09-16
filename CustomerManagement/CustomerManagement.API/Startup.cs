@@ -14,11 +14,6 @@ namespace CustomerManagement.API
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-
-            using (var context = new ApplicationDbContext())
-            {
-                AuthenticationDbInitializer.Seed(context);
-            }
         }
     }
 }

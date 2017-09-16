@@ -1,19 +1,22 @@
 ﻿using System.Configuration;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Web;
 using CustomerManagement.API.Constants;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace CustomerManagement.API.Models
 {
-    public class AuthenticationDbInitializer
+    public class AuthenticationDbInitializer:DropCreateDatabaseAlways<ApplicationDbContext>
     {
 
-        public static void Seed(ApplicationDbContext context)
+        protected  override void Seed(ApplicationDbContext context)
         {
-            var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));//new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
 
-            var roleManager =  new ApplicationRoleManager(new RoleStore<ApplicationRole>(context));//new RoleManager<ApplicationRole>(new RoleStore<ApplicationRole>(context));
+            var roleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(context));
 
 
 
@@ -46,7 +49,7 @@ namespace CustomerManagement.API.Models
             CreateUser(userManager, userName, password, role);
         }
 
-        private static void CreateUser(UserManager<ApplicationUser> userManager, string userName, string password, string role)
+        private static void CreateUser(ApplicationUserManager userManager, string userName, string password, string role)
         {
             var user = userManager.FindByName(userName);
 

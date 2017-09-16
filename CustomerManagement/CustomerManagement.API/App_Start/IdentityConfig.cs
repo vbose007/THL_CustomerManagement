@@ -1,4 +1,6 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -44,6 +46,54 @@ namespace CustomerManagement.API
             return manager;
         }
 
+        public bool AddToRole(string userId, string role)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var roleModel = ctx.Roles.SingleOrDefault(r => r.Name.Equals(role, StringComparison.OrdinalIgnoreCase));
+                var user = ctx.Users.SingleOrDefault(u => u.Id.Equals(userId));
+
+                if (user == null)
+                {
+                    throw new Exception($"Invalid userId: {userId}");
+                }
+
+                if (roleModel == null)
+                {
+                    throw new Exception($"Invalid Role Name: {role}");
+                }
+
+                if (IsUerInRole(user.Id, roleModel.Name))
+                {
+                    throw new Exception($"User Id {userId} is already has role: {role}");
+                }
+                var userRole = new ApplicationUserRole()
+                {
+                    RoleId = roleModel.Id,
+                    UserId = userId
+                };
+
+                ctx.UserRoles.Add(userRole);
+                ctx.SaveChanges();
+                return true;
+            }
+        }
+
+        public bool IsUerInRole(string userId, string roleName)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var role = ctx.Roles.SingleOrDefault(r => r.Name.Equals(roleName, StringComparison.OrdinalIgnoreCase));
+                var user = ctx.Users.SingleOrDefault(r => r.Id.Equals(userId));
+                
+                if (role != null)
+                {
+                    return ctx.UserRoles.Any(x => x.UserId.Equals(user.Id) && x.RoleId.Equals(role.Id));
+                }
+
+                return false;
+            }
+        }
 
     }
 
@@ -70,12 +120,12 @@ namespace CustomerManagement.API
         {
         }
 
-        public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
-        {
-            var applicationRoleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(context.Get<ApplicationDbContext>()));
-
-            return applicationRoleManager;
-        }
+        //public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
+        //{
+        //    var applicationRoleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(context.Get<ApplicationDbContext>()));
+            
+        //    return applicationRoleManager;
+        //}
     }
 
 }

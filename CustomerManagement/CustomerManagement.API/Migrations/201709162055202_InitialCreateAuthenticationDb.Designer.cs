@@ -7,13 +7,13 @@ namespace CustomerManagement.API.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitialAuthDBCreate : IMigrationMetadata
+    public sealed partial class InitialCreateAuthenticationDb : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialAuthDBCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreateAuthenticationDb));
         
         string IMigrationMetadata.Id
         {
-            get { return "201709140953141_InitialAuthDBCreate"; }
+            get { return "201709162055202_InitialCreateAuthenticationDb"; }
         }
         
         string IMigrationMetadata.Source

@@ -1,4 +1,5 @@
-﻿using CustomerManagement.API.Interfaces;
+﻿using CustomerManagement.API.Helpers;
+using CustomerManagement.API.Interfaces;
 using CustomerManagement.API.Services;
 using CustomerManagement.Data;
 using CustomerManagement.Data.Interfaces;
@@ -14,6 +15,7 @@ namespace CustomerManagement.API.Config
             var container = new UnityContainer();
             container.RegisterType<ICustomerService, CustomersService>();
             container.RegisterType<IRepository<Customer, CustomerModel>, CustomerRepository>();
+            container.RegisterType<IHttpContextHelper, HttpContextHelper>();
 
             return container;
         }

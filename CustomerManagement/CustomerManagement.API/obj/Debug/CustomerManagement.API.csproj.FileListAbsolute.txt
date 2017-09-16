@@ -101,7 +101,8 @@ C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\Cu
 C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.API\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.API\bin\System.Web.Http.Owin.xml
 C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.API\obj\Debug\CustomerManagement.API.csprojResolveAssemblyReference.cache
-C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.API\obj\Debug\CustomerManagement.API.Migrations.InitialAuthDBCreate.resources
-C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.API\obj\Debug\CustomerManagement.API.csproj.GenerateResource.Cache
 C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.API\obj\Debug\CustomerManagement.API.dll
 C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.API\obj\Debug\CustomerManagement.API.pdb
+C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.API\bin\XmlDocument.xml
+C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.API\obj\Debug\CustomerManagement.API.Migrations.InitialCreateAuthenticationDb.resources
+C:\Users\vijay\OneDrive\Documents\Tests\TourismHoldingsLtd\CustomerManagement\CustomerManagement.API\obj\Debug\CustomerManagement.API.csproj.GenerateResource.Cache
