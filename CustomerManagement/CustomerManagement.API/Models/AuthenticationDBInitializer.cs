@@ -1,11 +1,7 @@
-﻿using System.Configuration;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Web;
+﻿using System.Data.Entity;
 using CustomerManagement.API.Constants;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace CustomerManagement.API.Models
 {
@@ -22,7 +18,7 @@ namespace CustomerManagement.API.Models
 
             if (!roleManager.RoleExists(RolesEnum.Admin.ToString()))
             {
-                var roleresult = roleManager.Create(new ApplicationRole(RolesEnum.Admin.ToString()));
+                roleManager.Create(new ApplicationRole(RolesEnum.Admin.ToString()));
             }
 
             if (!roleManager.RoleExists(RolesEnum.User.ToString()))

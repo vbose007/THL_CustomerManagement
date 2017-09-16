@@ -285,7 +285,6 @@
     <Compile Include="Models\RolesEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
-    <Compile Include="Providers\ApplicationRoleProvider.cs" />
     <Compile Include="Providers\CustomerManagementAuthorizationProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="CustomExceptions\AuthorizationException.cs" />

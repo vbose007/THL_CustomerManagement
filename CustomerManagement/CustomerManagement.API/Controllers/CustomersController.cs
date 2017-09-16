@@ -54,7 +54,6 @@ namespace CustomerManagement.API.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "The data posted is invalid."));
                 return BadRequest(ModelState);
             }
 
@@ -93,7 +92,6 @@ namespace CustomerManagement.API.Controllers
         {
             if (!ModelState.IsValid || postCustomer ==null)
             {
-                //return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, "The data posted is invalid."));
                 return BadRequest(ModelState);
 
             }

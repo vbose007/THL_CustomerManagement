@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Web;
 using AutoMapper;
 using CustomerManagement.API.Config;
 using CustomerManagement.API.Constants;
@@ -16,8 +14,6 @@ using CustomerManagement.API.Models.RequestResponseModels;
 using CustomerManagement.Data;
 using CustomerManagement.Data.Interfaces;
 using CustomerManagement.Data.Models;
-using Microsoft.Ajax.Utilities;
-using Microsoft.AspNet.Identity;
 
 namespace CustomerManagement.API.Services
 {

@@ -1,11 +1,8 @@
 using System;
-using System.Configuration;
 using System.Linq.Expressions;
 using System.Text;
-using System.Web;
 using CustomerManagement.API.Constants;
 using CustomerManagement.API.Models.RequestResponseModels;
-using CustomerManagement.API.Services;
 using CustomerManagement.Data;
 
 namespace CustomerManagement.API.Helpers
@@ -22,7 +19,6 @@ namespace CustomerManagement.API.Helpers
 
         public string ComposeGetUrl(GetCustomersRequestModel query, int pageNumber)
         {
-            var uri = new Uri(HttpContext.Current.Request.Url.AbsoluteUri);
             string scheme = _httpHelper.Scheme;
             string schemeDelimiter = _httpHelper.SchemeDelimiter;
             string host = _httpHelper.Host;

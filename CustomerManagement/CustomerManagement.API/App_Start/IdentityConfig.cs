@@ -11,8 +11,6 @@ using Microsoft.Owin.Security;
 
 namespace CustomerManagement.API
 {
-    // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
-
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
@@ -120,12 +118,6 @@ namespace CustomerManagement.API
         {
         }
 
-        //public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
-        //{
-        //    var applicationRoleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(context.Get<ApplicationDbContext>()));
-            
-        //    return applicationRoleManager;
-        //}
     }
 
 }

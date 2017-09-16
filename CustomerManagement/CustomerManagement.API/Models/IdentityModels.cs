@@ -55,11 +55,6 @@ namespace CustomerManagement.API.Models
             return new ApplicationDbContext();
         }
 
-        //public DbSet<ApplicationUser> IdentityUsers { get; set; }
-
-        //public DbSet<ApplicationRole> IdentityRoles { get; set; }
-
-        //public DbSet<ApplicationUserRole> IdentityUserRoles { get; set; }
         public DbSet<ApplicationUserRole> UserRoles { get; set; }
     } 
     

@@ -17,7 +17,6 @@ namespace CustomerManagement.Data
         private CustomerDbContext db;
         public CustomerRepository()
         {
-            //new RepositoryMapperConfig().ConfigureMappings();
             db = new CustomerDbContext();
         }
 
@@ -111,10 +110,6 @@ namespace CustomerManagement.Data
             if (model == null || model.Id==0) return 0;
 
             var customer = db.Customers.Find(model.Id);
-
-            //db.Entry(customer).State = EntityState.Detached;
-
-            //customer = model.ToModel();
 
             db.Entry(customer).CurrentValues.SetValues(model.ToModel());
             db.SaveChanges();

@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using CustomerManagement.API.DTOs;
 using CustomerManagement.API.Models.RequestResponseModels;
 using CustomerManagement.Data.Config;
