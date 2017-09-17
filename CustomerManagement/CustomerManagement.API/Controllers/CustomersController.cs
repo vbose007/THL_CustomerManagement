@@ -99,13 +99,17 @@ namespace CustomerManagement.API.Controllers
             try
             {
                 var customerDto = Mapper.Map<CustomerDto>(postCustomer);
-                customerDto =_customerService.Create(customerDto);
+                customerDto = _customerService.Create(customerDto);
 
                 postCustomer = Mapper.Map<PostCustomerRequestModel>(customerDto);
 
                 return CreatedAtRoute("DefaultApi", new {id = customerDto.Id}, customerDto);
             }
             catch (AccountWithSameEmailExistsException ex)
+            {
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message));
+            }
+            catch (BadRequestException ex)
             {
                 return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message));
             }
@@ -134,6 +138,10 @@ namespace CustomerManagement.API.Controllers
                 {
                     return Ok(customerDto);
                 }
+            }
+            catch (AuthorizationException ex)
+            {
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.Forbidden, ex.Message));
             }
             catch (Exception e)
             {

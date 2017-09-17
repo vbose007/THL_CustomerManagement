@@ -69,7 +69,11 @@ namespace CustomerManagement.API.Services
 
                 if (authorizedToUpdate)
                 {
-                    return _repo.Update(Mapper.Map<CustomerModel>(customerDto)) == 1;
+                    customerModel = Mapper.Map<CustomerModel>(customerDto);
+
+                    ValidateCustomerModel(customerModel);
+
+                    return _repo.Update(customerModel) == 1;
                 }
 
                 string currentUserName = _httpHelper.CurrentUserName;
@@ -82,7 +86,7 @@ namespace CustomerManagement.API.Services
 
         }
 
-        private bool IsUserAuthorizedToUpdateOrDeleteCustomer(CustomerModel customerModel)
+        public bool IsUserAuthorizedToUpdateOrDeleteCustomer(CustomerModel customerModel)
         {
             var currentUserName = _httpHelper.CurrentUserName;
 
@@ -105,6 +109,8 @@ namespace CustomerManagement.API.Services
 
                 customerModel.CreatedBy = _httpHelper.CurrentUserName;
 
+                ValidateCustomerModel(customerModel);
+
                 var addedCustomer = _repo.Add(customerModel);
 
                 return Mapper.Map<CustomerDto>(addedCustomer);
@@ -114,6 +120,25 @@ namespace CustomerManagement.API.Services
                 //TODO : log exception
                 throw e;
             }
+        }
+
+        public void ValidateCustomerModel(CustomerModel customerModel)
+        {
+            if (string.IsNullOrWhiteSpace(customerModel.Name))
+            {
+                throw new BadRequestException("Customer Name is required");
+            }
+
+            if (string.IsNullOrWhiteSpace(customerModel.EmailAddress))
+            {
+                throw new BadRequestException("Customer Email address is required");
+            }
+
+            if (string.IsNullOrWhiteSpace(customerModel.EmailAddress))
+            {
+                throw new BadRequestException("Customer Email address is required");
+            }
+
         }
 
         public bool Delete(CustomerDto customerDto)
